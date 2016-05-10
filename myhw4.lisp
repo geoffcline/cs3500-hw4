@@ -1,6 +1,3 @@
-(defun triple (X)
-	(* 3 X)
-)
 
 (defun myLast (L)
 	(car (myRev L))
@@ -32,4 +29,33 @@
 
 (defun myPurge (L)
 	(list (car L) (myPurge (myRemove X (cdr L))))
+)
+
+(defun myCommon (L1 L2)
+	(cond 
+		((eq L1 nil) (nil))
+		((eq myMember((car L1) L2) t) (list (car L1) (myCommon (cdr L1) L2)))
+		((/= myMember((car L1) L2) t) (myCommon (cdr L1) L2))
+	)
+)
+
+(defun myGen (X Y Z)
+	(cond 
+		((<= (+ X Y) Z) (list X (myGen (+ X Y) Y Z)))
+		((> (+ X Y) Z) (nil))
+	)
+)
+
+(defun myMap (F L)
+	(cond
+		((/= L nil) (list (F (car L)) (myMap F (cdr L))))
+		((eq L nil) (nil))
+	)
+)
+
+(defun myReduce (F L)
+	(cond
+		((/= (cdr (cdr L)) nil) (F (car L) (myReduce F (cdr L))))
+		((eq (cdr (cdr L)) nil) (F (car L) (car (cdr L))))
+ 	)
 )

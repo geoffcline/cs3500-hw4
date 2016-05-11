@@ -68,7 +68,7 @@
 	)
 )
 
-;
+;incrementally applies function F to the combination of all items in L
 (defun myReduce (F L)
 	(cond
 		((eq (cdr L) nil) (car L))

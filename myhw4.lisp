@@ -60,18 +60,18 @@
 	)
 )
 
-; this suck
-
+;applies function F to each item in list L
 (defun myMap (F L)
 	(cond
-		((not (eq L nil)) (cons (F (car L)) (myMap F (cdr L))))
+		((not (eq L nil)) (cons (funcall F (car L)) (myMap F (cdr L))))
 		((eq L nil) nil)
 	)
 )
 
+;
 (defun myReduce (F L)
 	(cond
-		((not (eq (cdr (cdr L)) nil)) (F (car L) (myReduce F (cdr L))))
-		((eq (cdr (cdr L)) nil) (F (car L) (car (cdr L))))
+		((eq (cdr L) nil) (car L))
+		((not (eq (cdr L) nil)) (funcall F (car L) (myReduce F (cdr L))))
  	)
 )

@@ -42,12 +42,10 @@
 	)
 )
 
-; this suck
-
 ;returns the elements in both L1 and L1 in the order of L1
 (defun myCommon (L1 L2)
 	(cond 
-		((eq L1 nil) (nil))
+		((eq L1 nil) nil)
 		((eq (myMember (car L1) L2) t) (cons (car L1) (myCommon (cdr L1) L2) ) )
 		((not (eq (myMember (car L1) L2) t)) (myCommon (cdr L1) L2))
 	)
@@ -56,15 +54,18 @@
 ;returns a list of atoms starting at X, incrementing by Y, up to and including Z
 (defun myGen (X Y Z)
 	(cond 
-		((< (+ X Y) Z) (cons X (myGen (+ X Y) Y Z)))
-		((> (+ X Y) Z) (nil))
+		((<  X Y) (cons X (myGen (+ X Z) Y Z)))
+		((eq X Y) (cons X (myGen (+ X Z) Y Z)))
+		((>  X Y) nil)
 	)
 )
+
+; this suck
 
 (defun myMap (F L)
 	(cond
 		((not (eq L nil)) (cons (F (car L)) (myMap F (cdr L))))
-		((eq L nil) (nil))
+		((eq L nil) nil)
 	)
 )
 

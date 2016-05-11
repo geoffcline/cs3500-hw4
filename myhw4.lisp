@@ -1,4 +1,8 @@
+;Geoffrey Cline
+;CS3500, A, HW4
+;May 6th, 2016
 
+;returns the last atom of a list
 (defun myLast (L)
 	(cond
 		((eq (cdr L) nil) (car L))
@@ -6,6 +10,7 @@
 	)
 )
 
+;returns the number of times an atom appears in a list
 (defun myCount (X L)
 	(cond 
 		((eq L nil) 0)
@@ -14,10 +19,12 @@
 	)
 )
 
+;retuns if true if an atom is a list
 (defun myMember (X L)
 	(> (myCount X L) 0)
 )
 
+;removes all appearances of atom x from list l
 (defun myRemove (X L)
 	(cond
 		((eq L nil) nil)
@@ -26,6 +33,8 @@
 	)
 )
 
+;the count of all atoms in the resulting list will be at most 1
+;the first appearance is kept
 (defun myPurge (L)
 	(cond 
 		((eq L nil) nil)
@@ -33,6 +42,9 @@
 	)
 )
 
+; this suck
+
+;returns the elements in both L1 and L1 in the order of L1
 (defun myCommon (L1 L2)
 	(cond 
 		((eq L1 nil) (nil))
@@ -41,9 +53,10 @@
 	)
 )
 
+;returns a list of atoms starting at X, incrementing by Y, up to and including Z
 (defun myGen (X Y Z)
 	(cond 
-		((<= (+ X Y) Z) (cons X (myGen (+ X Y) Y Z)))
+		((< (+ X Y) Z) (cons X (myGen (+ X Y) Y Z)))
 		((> (+ X Y) Z) (nil))
 	)
 )

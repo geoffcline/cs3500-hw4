@@ -1,17 +1,16 @@
 
 (defun myLast (L)
-	(car (myRev L))
-)
-
-(defun myRev (L)
-	(list (myRev (cdr L)) (car L)) 
+	(cond
+		((eq (cdr L) nil) (car L))
+		((not (eq (cdr L) nil)) (myLast (cdr L)))
+	)
 )
 
 (defun myCount (X L)
 	(cond 
 		((eq L nil) 0)
-		((eq (car L) X) (+ 1 myCount(X (cdr L))))
-		((/= (car L) X) (myCount (X (cdr L))))
+		((eq (car L) X) (+ 1 (myCount X (cdr L))))
+		((not (eq (car L) X)) (myCount X (cdr L)) )
 	)
 )
 
@@ -23,7 +22,7 @@
 	(cond
 		((eq L nil) nil)
 		((eq (car L) X) (myRemove X (cdr L)))
-		((/= (car L) X) (list (car L) (myRemove X (cdr L))))
+		((not (eq (car L) X)) (list (car L) (myRemove X (cdr L))))
 	)
 )
 
@@ -35,7 +34,7 @@
 	(cond 
 		((eq L1 nil) (nil))
 		((eq myMember((car L1) L2) t) (list (car L1) (myCommon (cdr L1) L2)))
-		((/= myMember((car L1) L2) t) (myCommon (cdr L1) L2))
+		((not (eq myMember((car L1) L2) t)) (myCommon (cdr L1) L2))
 	)
 )
 
@@ -48,14 +47,14 @@
 
 (defun myMap (F L)
 	(cond
-		((/= L nil) (list (F (car L)) (myMap F (cdr L))))
+		((not (eq L nil)) (list (F (car L)) (myMap F (cdr L))))
 		((eq L nil) (nil))
 	)
 )
 
 (defun myReduce (F L)
 	(cond
-		((/= (cdr (cdr L)) nil) (F (car L) (myReduce F (cdr L))))
+		((not (eq (cdr (cdr L)) nil)) (F (car L) (myReduce F (cdr L))))
 		((eq (cdr (cdr L)) nil) (F (car L) (car (cdr L))))
  	)
 )
